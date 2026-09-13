@@ -7,12 +7,10 @@ from aiogram.enums import ParseMode
 from aiogram.filters import CommandStart
 from aiogram.types import Message, CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton
 
-# توكن البوت الخاص بك
 TOKEN = "8576788403:AAEiiGrDgrrw9caeai20B1R-4WsWvGdXVRk"
 
 dp = Dispatcher()
 
-# رسالة البدء مع زر ولاية خنشلة
 @dp.message(CommandStart())
 async def command_start_handler(message: Message) -> None:
     keyboard = InlineKeyboardMarkup(inline_keyboard=[
@@ -26,7 +24,6 @@ async def command_start_handler(message: Message) -> None:
         reply_markup=keyboard
     )
 
-# التعامل مع الضغط على زر ولاية خنشلة
 @dp.callback_query(F.data == "khenchela_menu")
 async def khenchela_restaurants(callback: CallbackQuery) -> None:
     restaurants_text = (
