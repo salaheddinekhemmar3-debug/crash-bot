@@ -2,12 +2,13 @@ import os
 import asyncio
 from aiohttp import web
 from aiogram import Bot, Dispatcher, types
+from aiogram.filters import CommandStart
 
 TOKEN = os.getenv("BOT_TOKEN")
 bot = Bot(token=TOKEN)
-dp = Dispatcher(bot)
+dp = Dispatcher()
 
-@dp.message_handler(commands=['start'])
+@dp.message(CommandStart())
 async def send_welcome(message: types.Message):
     await message.reply("مرحباً بك في بوت مطاعم خنشلة يعمل بنجاح!")
 
@@ -25,7 +26,7 @@ async def web_server():
 
 async def main():
     asyncio.create_task(web_server())
-    await dp.start_polling()
+    await dp.start_polling(bot)
 
 if __name__ == '__main__':
     asyncio.run(main())
